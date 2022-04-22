@@ -1,6 +1,6 @@
 ---
-title: "dplyr / Aquero, ggplot2 / Plot"
-subtitle: "A comparison of common data wrangling & visualization tools in R & JavaScript"
+title: "A comparison of data wrangling & visualization in R & JavaScript"
+subtitle: "Focusing on dplyr and Arquero"
 author: "Allison Horst"
 date: 2022-04-22
 ---
@@ -10,6 +10,8 @@ date: 2022-04-22
 The goal of this document is to compare some basic wrangling (between `tidyverse` functions (especially in `dplyr`) in R, and `Arquero` in JavaScript) and visualization (between `ggplot2` in R, and `Plot` in JavaScript). I'm still learning about JavaScript and Observable -- this is a living document that will keep growing (and being corrected) as I learn more useful comparisons! 
 
 For those of you R users, don't fear - `Arquero` feels pretty darn familiar to `dplyr` once you get rolling. From the `Arquero` repo: "Arquero is a JavaScript library for query processing and transformation of array-backed data tables. Following the relational algebra and inspired by the design of `dplyr`, Arquero provides a fluent API for manipulating column-oriented data frames. Arquero supports a range of data transformation tasks, including filter, sample, aggregation, window, join, and reshaping operations." 
+
+See all `Arquero` verbs: https://uwdata.github.io/arquero/api/verbs.html
 
 ## Attaching / importing libraries:
 
@@ -95,7 +97,7 @@ penguins_js
   .view(10) // Preview top 10 lines of output
 ```
 
-**Sidebar:** What is this `d => d.island` syntax? This looked unfamiliar to me, too. I'm still trying to figure out the language to align this with what's going on (compared to R) -- what's the "one-liner" version of what's happening in `d => d.island == "Dream"` here? Is that akin to needing `.` as the first argument of an R function? 
+[TODO] **Sidebar:** What is this `d => d.island` syntax? This looked unfamiliar to me, too. I'm still trying to figure out the language to align this with what's going on (compared to R) -- what's the "one-liner" version of what's happening in `d => d.island == "Dream"` here? Is that akin to needing `.` as the first argument of an R function?  
 
 
 ### Filtering based on multiple conditions (intersection)
@@ -153,6 +155,8 @@ We can use `dplyr::select()` to select, omit, or rearrange columns (variables, i
 
 #### R Tidyverse version (select variables)
 
+Use `dplyr::select()` to select variables.
+
 ```{r}
 penguins_r %>% 
   select(species, island, flipper_length_mm) %>% 
@@ -161,6 +165,8 @@ penguins_r %>%
 
 #### ObservableJS Arquero version (select variables)
 
+Use Arquero `select()` to select variables. 
+
 ```{ojs}
 penguins_js
   .select('species', 'island', 'flipper_length_mm')
@@ -168,3 +174,33 @@ penguins_js
 ```
 
 *Note:* for both, you can also select by position index (column number). Lots of other options for selecting columns exist that are not included here...at least not right now (e.g. selecting sequential columns, selecting columns that contain a specific string pattern, etc.).
+
+## Aggregated calculations by group
+
+A very common task for any data scientist is to aggregate values by group (e.g. levels of a variable - like penguin species), then perform one or more operations on those grouped values. In `dplyr`, that's done using `group_by() %>% summarize()`. Learn more about that powerhouse combination from the [dplyr documentation](https://dplyr.tidyverse.org/reference/summarise.html).
+
+In JavaScript, use `Arquero`'s `groupby()` and `rollup()` functions to get the same results. Let's compare them! 
+
+### A single grouped aggregate calculation 
+
+**Task:** Find the mean body mass of penguins, by species. 
+
+#### R Tidyverse version 
+
+```{r}
+penguins_r %>% 
+  group_by(species) %>% 
+  summarize(mean_body_mass = mean(body_mass_g, na.rm = TRUE))
+```
+
+#### Arquero JavaScript version
+
+```{ojs}
+penguins_js 
+  .filter(d => d.body_mass_g !== "NA")
+  .groupby('species')
+  .rollup({body_mass_g: d => op.mean(d.body_mass_g)})
+  .view()
+```
+
+[TODO]: `Arquero` version of `na.rm`?

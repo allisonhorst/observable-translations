@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <meta name="author" content="Allison Horst">
   <meta name="dcterms.date" content="2022-04-22">
-  <title>dplyr / Aquero, ggplot2 / Plot</title>
+  <title>A comparison of data wrangling &amp; visualization in R &amp; JavaScript</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -106,13 +106,14 @@
 
 
 
-<div class="quarto-title"><h1 class="title display-7">dplyr / Aquero, ggplot2 / Plot</h1><p class="subtitle lead">A comparison of common data wrangling &amp; visualization tools in R &amp; JavaScript</p></div><div class="quarto-title-meta"><div><div class="quarto-title-meta-heading">Author</div><div class="quarto-title-meta-contents"><div class="quarto-title-authors"><div><div>
+<div class="quarto-title"><h1 class="title display-7">A comparison of data wrangling &amp; visualization in R &amp; JavaScript</h1><p class="subtitle lead">Focusing on dplyr and Arquero</p></div><div class="quarto-title-meta"><div><div class="quarto-title-meta-heading">Author</div><div class="quarto-title-meta-contents"><div class="quarto-title-authors"><div><div>
 <p>Allison Horst</p>
 </div></div></div></div></div><div><div class="quarto-title-meta-heading">Published</div><div class="quarto-title-meta-contents"><p class="date">April 22, 2022</p></div></div></div></header>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>The goal of this document is to compare some basic wrangling (between <code>tidyverse</code> functions (especially in <code>dplyr</code>) in R, and <code>Arquero</code> in JavaScript) and visualization (between <code>ggplot2</code> in R, and <code>Plot</code> in JavaScript). I’m still learning about JavaScript and Observable – this is a living document that will keep growing (and being corrected) as I learn more useful comparisons!</p>
 <p>For those of you R users, don’t fear - <code>Arquero</code> feels pretty darn familiar to <code>dplyr</code> once you get rolling. From the <code>Arquero</code> repo: “Arquero is a JavaScript library for query processing and transformation of array-backed data tables. Following the relational algebra and inspired by the design of <code>dplyr</code>, Arquero provides a fluent API for manipulating column-oriented data frames. Arquero supports a range of data transformation tasks, including filter, sample, aggregation, window, join, and reshaping operations.”</p>
+<p>See all <code>Arquero</code> verbs: https://uwdata.github.io/arquero/api/verbs.html</p>
 </section>
 <section id="attaching-importing-libraries" class="level2">
 <h2 class="anchored" data-anchor-id="attaching-importing-libraries">Attaching / importing libraries:</h2>
@@ -127,7 +128,7 @@
 <section id="importing-javascript-library-arquero" class="level3">
 <h3 class="anchored" data-anchor-id="importing-javascript-library-arquero">Importing JavaScript library <code>Arquero</code></h3>
 <div class="cell">
-<div class="sourceCode" id="cb2" data-startfrom="28" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 27;"><span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { aq<span class="op">,</span> op } <span class="im">from</span> <span class="st">'@uwdata/arquero'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2" data-startfrom="30" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 29;"><span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { aq<span class="op">,</span> op } <span class="im">from</span> <span class="st">'@uwdata/arquero'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-1" data-nodetype="declaration">
 
@@ -170,7 +171,7 @@
 <h3 class="anchored" data-anchor-id="observablejs-arquero-version">ObservableJS Arquero version:</h3>
 <p>We can read in <code>penguins.csv</code> using the <code>.loadCSV()</code> function from the <a href="https://observablehq.com/@uwdata/introducing-arquero">Arquero</a> library, which I am quickly learning to love.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6" data-startfrom="63" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 62;"><span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>penguins_js <span class="op">=</span> aq<span class="op">.</span><span class="fu">loadCSV</span>(<span class="st">"penguins.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6" data-startfrom="65" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 64;"><span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>penguins_js <span class="op">=</span> aq<span class="op">.</span><span class="fu">loadCSV</span>(<span class="st">"penguins.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-2" data-nodetype="declaration">
 
@@ -179,8 +180,8 @@
 </div>
 <p>Check out the first 10 rows:</p>
 <div class="cell">
-<div class="sourceCode" id="cb7" data-startfrom="69" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 68;"><span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>penguins_js</span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7" data-startfrom="71" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 70;"><span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>penguins_js</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-3" data-nodetype="expression">
 
@@ -222,16 +223,16 @@
 <section id="observablejs-arquero-version-single-condition" class="level4">
 <h4 class="anchored" data-anchor-id="observablejs-arquero-version-single-condition">ObservableJS Arquero version (single condition)</h4>
 <div class="cell">
-<div class="sourceCode" id="cb10" data-startfrom="93" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 92;"><span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a>penguins_js</span>
-<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">island</span> <span class="op">==</span> <span class="st">"Dream"</span>) <span class="co">// Do the filtering</span></span>
-<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10" data-startfrom="95" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 94;"><span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>penguins_js</span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">island</span> <span class="op">==</span> <span class="st">"Dream"</span>) <span class="co">// Do the filtering</span></span>
+<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-4" data-nodetype="expression">
 
 </div>
 </div>
 </div>
-<p><strong>Sidebar:</strong> What is this <code>d =&gt; d.island</code> syntax? This looked unfamiliar to me, too. I’m still trying to figure out the language to align this with what’s going on (compared to R) – what’s the “one-liner” version of what’s happening in <code>d =&gt; d.island == "Dream"</code> here? Is that akin to needing <code>.</code> as the first argument of an R function?</p>
+<p><a href="%60Arquero%60%20version%20of%20%60na.rm%60?">TODO</a> <strong>Sidebar:</strong> What is this <code>d =&gt; d.island</code> syntax? This looked unfamiliar to me, too. I’m still trying to figure out the language to align this with what’s going on (compared to R) – what’s the “one-liner” version of what’s happening in <code>d =&gt; d.island == "Dream"</code> here? Is that akin to needing <code>.</code> as the first argument of an R function?</p>
 </section>
 </section>
 <section id="filtering-based-on-multiple-conditions-intersection" class="level3">
@@ -265,9 +266,9 @@
 <section id="observablejs-arquero-version-multiple-conditions-intersection" class="level4">
 <h4 class="anchored" data-anchor-id="observablejs-arquero-version-multiple-conditions-intersection">ObservableJS Arquero version (multiple conditions, intersection)</h4>
 <div class="cell">
-<div class="sourceCode" id="cb13" data-startfrom="119" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 118;"><span id="cb13-119"><a href="#cb13-119" aria-hidden="true" tabindex="-1"></a>penguins_js</span>
-<span id="cb13-120"><a href="#cb13-120" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">species</span> <span class="op">==</span> <span class="st">"Chinstrap"</span> <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">flipper_length_mm</span> <span class="op">&gt;</span> <span class="dv">200</span>)</span>
-<span id="cb13-121"><a href="#cb13-121" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13" data-startfrom="121" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 120;"><span id="cb13-121"><a href="#cb13-121" aria-hidden="true" tabindex="-1"></a>penguins_js</span>
+<span id="cb13-122"><a href="#cb13-122" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">species</span> <span class="op">==</span> <span class="st">"Chinstrap"</span> <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">flipper_length_mm</span> <span class="op">&gt;</span> <span class="dv">200</span>)</span>
+<span id="cb13-123"><a href="#cb13-123" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-5" data-nodetype="expression">
 
@@ -306,9 +307,9 @@
 <section id="observablejs-arquero-version-multiple-conditions-union" class="level4">
 <h4 class="anchored" data-anchor-id="observablejs-arquero-version-multiple-conditions-union">ObservableJS Arquero version (multiple conditions, union)</h4>
 <div class="cell">
-<div class="sourceCode" id="cb16" data-startfrom="141" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 140;"><span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a>penguins_js </span>
-<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">island</span> <span class="op">==</span> <span class="st">"Biscoe"</span> <span class="op">|</span> d<span class="op">.</span><span class="at">year</span> <span class="op">==</span> <span class="dv">2007</span>)</span>
-<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16" data-startfrom="143" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 142;"><span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a>penguins_js </span>
+<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">island</span> <span class="op">==</span> <span class="st">"Biscoe"</span> <span class="op">|</span> d<span class="op">.</span><span class="at">year</span> <span class="op">==</span> <span class="dv">2007</span>)</span>
+<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-6" data-nodetype="expression">
 
@@ -326,6 +327,7 @@
 <p><strong>Task:</strong> Select only the species, island, and flipper length variables.</p>
 <section id="r-tidyverse-version-select-variables" class="level4">
 <h4 class="anchored" data-anchor-id="r-tidyverse-version-select-variables">R Tidyverse version (select variables)</h4>
+<p>Use <code>dplyr::select()</code> to select variables.</p>
 <div class="cell">
 <div class="sourceCode" id="cb17"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>penguins_r <span class="sc">%&gt;%</span> </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, island, flipper_length_mm) <span class="sc">%&gt;%</span> </span>
@@ -344,10 +346,11 @@
 </section>
 <section id="observablejs-arquero-version-select-variables" class="level4">
 <h4 class="anchored" data-anchor-id="observablejs-arquero-version-select-variables">ObservableJS Arquero version (select variables)</h4>
+<p>Use Arquero <code>select()</code> to select variables.</p>
 <div class="cell">
-<div class="sourceCode" id="cb19" data-startfrom="165" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 164;"><span id="cb19-165"><a href="#cb19-165" aria-hidden="true" tabindex="-1"></a>penguins_js</span>
-<span id="cb19-166"><a href="#cb19-166" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">select</span>(<span class="st">'species'</span><span class="op">,</span> <span class="st">'island'</span><span class="op">,</span> <span class="st">'flipper_length_mm'</span>)</span>
-<span id="cb19-167"><a href="#cb19-167" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19" data-startfrom="171" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 170;"><span id="cb19-171"><a href="#cb19-171" aria-hidden="true" tabindex="-1"></a>penguins_js</span>
+<span id="cb19-172"><a href="#cb19-172" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">select</span>(<span class="st">'species'</span><span class="op">,</span> <span class="st">'island'</span><span class="op">,</span> <span class="st">'flipper_length_mm'</span>)</span>
+<span id="cb19-173"><a href="#cb19-173" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-7" data-nodetype="expression">
 
@@ -355,6 +358,46 @@
 </div>
 </div>
 <p><em>Note:</em> for both, you can also select by position index (column number). Lots of other options for selecting columns exist that are not included here…at least not right now (e.g.&nbsp;selecting sequential columns, selecting columns that contain a specific string pattern, etc.).</p>
+</section>
+</section>
+</section>
+<section id="aggregated-calculations-by-group" class="level2">
+<h2 class="anchored" data-anchor-id="aggregated-calculations-by-group">Aggregated calculations by group</h2>
+<p>A very common task for any data scientist is to aggregate values by group (e.g.&nbsp;levels of a variable - like penguin species), then perform one or more operations on those grouped values. In <code>dplyr</code>, that’s done using <code>group_by() %&gt;% summarize()</code>. Learn more about that powerhouse combination from the <a href="https://dplyr.tidyverse.org/reference/summarise.html">dplyr documentation</a>.</p>
+<p>In JavaScript, use <code>Arquero</code>’s <code>groupby()</code> and <code>rollup()</code> functions to get the same results. Let’s compare them!</p>
+<section id="a-single-grouped-aggregate-calculation" class="level3">
+<h3 class="anchored" data-anchor-id="a-single-grouped-aggregate-calculation">A single grouped aggregate calculation</h3>
+<p><strong>Task:</strong> Find the mean body mass of penguins, by species.</p>
+<section id="r-tidyverse-version-1" class="level4">
+<h4 class="anchored" data-anchor-id="r-tidyverse-version-1">R Tidyverse version</h4>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>penguins_r <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_body_mass =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  species   mean_body_mass
+  &lt;chr&gt;              &lt;dbl&gt;
+1 Adelie             3701.
+2 Chinstrap          3733.
+3 Gentoo             5076.</code></pre>
+</div>
+</div>
+</section>
+<section id="arquero-javascript-version" class="level4">
+<h4 class="anchored" data-anchor-id="arquero-javascript-version">Arquero JavaScript version</h4>
+<div class="cell">
+<div class="sourceCode" id="cb22" data-startfrom="199" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 198;"><span id="cb22-199"><a href="#cb22-199" aria-hidden="true" tabindex="-1"></a>penguins_js </span>
+<span id="cb22-200"><a href="#cb22-200" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">body_mass_g</span> <span class="op">!==</span> <span class="st">"NA"</span>)</span>
+<span id="cb22-201"><a href="#cb22-201" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">groupby</span>(<span class="st">'species'</span>)</span>
+<span id="cb22-202"><a href="#cb22-202" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">rollup</span>({<span class="dt">body_mass_g</span><span class="op">:</span> d <span class="kw">=&gt;</span> op<span class="op">.</span><span class="fu">mean</span>(d<span class="op">.</span><span class="at">body_mass_g</span>)})</span>
+<span id="cb22-203"><a href="#cb22-203" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ojs-cell-8" data-nodetype="expression">
+
+</div>
+</div>
+</div>
 
 </section>
 </section>
@@ -362,7 +405,7 @@
 </main>
 <!-- /main column -->
 <script type="ojs-module-contents">
-{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"import { aq, op } from '@uwdata/arquero'"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"penguins_js = aq.loadCSV(\"penguins.csv\")"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"penguins_js\n  .view(10)"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"penguins_js\n  .filter(d => d.island == \"Dream\") // Do the filtering\n  .view(10) // Preview top 10 lines of output"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"penguins_js\n  .filter(d => d.species == \"Chinstrap\" && d.flipper_length_mm > 200)\n  .view(10)"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"penguins_js \n  .filter(d => d.island == \"Biscoe\" | d.year == 2007)\n  .view()"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"penguins_js\n  .select('species', 'island', 'flipper_length_mm')\n  .view(5)"}]}
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"import { aq, op } from '@uwdata/arquero'"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"penguins_js = aq.loadCSV(\"penguins.csv\")"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"penguins_js\n  .view(10)"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"penguins_js\n  .filter(d => d.island == \"Dream\") // Do the filtering\n  .view(10) // Preview top 10 lines of output"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"penguins_js\n  .filter(d => d.species == \"Chinstrap\" && d.flipper_length_mm > 200)\n  .view(10)"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"penguins_js \n  .filter(d => d.island == \"Biscoe\" | d.year == 2007)\n  .view()"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"penguins_js\n  .select('species', 'island', 'flipper_length_mm')\n  .view(5)"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"penguins_js \n  .filter(d => d.body_mass_g !== \"NA\")\n  .groupby('species')\n  .rollup({body_mass_g: d => op.mean(d.body_mass_g)})\n  .view()"}]}
 </script>
 <script type="module">
 window._ojs.paths.runtimeToDoc = "../../..";
