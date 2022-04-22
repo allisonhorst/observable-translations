@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <meta name="author" content="Allison Horst">
   <meta name="dcterms.date" content="2022-04-22">
-  <title>A comparison of data wrangling &amp; visualization in R &amp; JavaScript</title>
+  <title>A comparison of data wrangling in dplyr and Arquero</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -78,18 +78,18 @@
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 
-  <script src="observable-tidyverse_files/libs/clipboard/clipboard.min.js"></script>
-  <script src="observable-tidyverse_files/libs/quarto-html/quarto.js"></script>
-  <script src="observable-tidyverse_files/libs/quarto-html/popper.min.js"></script>
-  <script src="observable-tidyverse_files/libs/quarto-html/tippy.umd.min.js"></script>
-  <script src="observable-tidyverse_files/libs/quarto-html/anchor.min.js"></script>
-  <link href="observable-tidyverse_files/libs/quarto-html/tippy.css" rel="stylesheet">
-  <link id="quarto-text-highlighting-styles" href="observable-tidyverse_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
-  <script src="observable-tidyverse_files/libs/bootstrap/bootstrap.min.js"></script>
-  <link href="observable-tidyverse_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-  <link href="observable-tidyverse_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet">
-  <script type="module" src="observable-tidyverse_files/libs/quarto-ojs/esbuild-bundle.js"></script>
-  <link href="observable-tidyverse_files/libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+  <script src="dplyr-arquero_files/libs/clipboard/clipboard.min.js"></script>
+  <script src="dplyr-arquero_files/libs/quarto-html/quarto.js"></script>
+  <script src="dplyr-arquero_files/libs/quarto-html/popper.min.js"></script>
+  <script src="dplyr-arquero_files/libs/quarto-html/tippy.umd.min.js"></script>
+  <script src="dplyr-arquero_files/libs/quarto-html/anchor.min.js"></script>
+  <link href="dplyr-arquero_files/libs/quarto-html/tippy.css" rel="stylesheet">
+  <link id="quarto-text-highlighting-styles" href="dplyr-arquero_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <script src="dplyr-arquero_files/libs/bootstrap/bootstrap.min.js"></script>
+  <link href="dplyr-arquero_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+  <link href="dplyr-arquero_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <script type="module" src="dplyr-arquero_files/libs/quarto-ojs/esbuild-bundle.js"></script>
+  <link href="dplyr-arquero_files/libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -106,7 +106,7 @@
 
 
 
-<div class="quarto-title"><h1 class="title display-7">A comparison of data wrangling &amp; visualization in R &amp; JavaScript</h1><p class="subtitle lead">Focusing on dplyr and Arquero</p></div><div class="quarto-title-meta"><div><div class="quarto-title-meta-heading">Author</div><div class="quarto-title-meta-contents"><div class="quarto-title-authors"><div><div>
+<div class="quarto-title"><h1 class="title display-7">A comparison of data wrangling in dplyr and Arquero</h1><p class="subtitle lead">R to JavaScript translations</p></div><div class="quarto-title-meta"><div><div class="quarto-title-meta-heading">Author</div><div class="quarto-title-meta-contents"><div class="quarto-title-authors"><div><div>
 <p>Allison Horst</p>
 </div></div></div></div></div><div><div class="quarto-title-meta-heading">Published</div><div class="quarto-title-meta-contents"><p class="date">April 22, 2022</p></div></div></div></header>
 <section id="overview" class="level2">
@@ -232,7 +232,7 @@
 </div>
 </div>
 </div>
-<p><a href="%60Arquero%60%20version%20of%20%60na.rm%60?">TODO</a> <strong>Sidebar:</strong> What is this <code>d =&gt; d.island</code> syntax? This looked unfamiliar to me, too. I’m still trying to figure out the language to align this with what’s going on (compared to R) – what’s the “one-liner” version of what’s happening in <code>d =&gt; d.island == "Dream"</code> here? Is that akin to needing <code>.</code> as the first argument of an R function?</p>
+<p>TODO <strong>Sidebar:</strong> What is this <code>d =&gt; d.island</code> syntax? This looked unfamiliar to me, too. I’m still trying to figure out the language to align this with what’s going on (compared to R) – what’s the “one-liner” version of what’s happening in <code>d =&gt; d.island == "Dream"</code> here? Is that akin to needing <code>.</code> as the first argument of an R function?</p>
 </section>
 </section>
 <section id="filtering-based-on-multiple-conditions-intersection" class="level3">
@@ -398,6 +398,7 @@
 </div>
 </div>
 </div>
+<p>TODO: <code>Arquero</code> version of <code>na.rm</code>?</p>
 
 </section>
 </section>

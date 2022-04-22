@@ -1,6 +1,6 @@
 ---
-title: "A comparison of data wrangling & visualization in R & JavaScript"
-subtitle: "Focusing on dplyr and Arquero"
+title: "A comparison of data wrangling in dplyr and Arquero"
+subtitle: "R to JavaScript translations"
 author: "Allison Horst"
 date: 2022-04-22
 ---
@@ -97,7 +97,7 @@ penguins_js
   .view(10) // Preview top 10 lines of output
 ```
 
-[TODO] **Sidebar:** What is this `d => d.island` syntax? This looked unfamiliar to me, too. I'm still trying to figure out the language to align this with what's going on (compared to R) -- what's the "one-liner" version of what's happening in `d => d.island == "Dream"` here? Is that akin to needing `.` as the first argument of an R function?  
+TODO **Sidebar:** What is this `d => d.island` syntax? This looked unfamiliar to me, too. I'm still trying to figure out the language to align this with what's going on (compared to R) -- what's the "one-liner" version of what's happening in `d => d.island == "Dream"` here? Is that akin to needing `.` as the first argument of an R function?  
 
 
 ### Filtering based on multiple conditions (intersection)
@@ -203,4 +203,4 @@ penguins_js
   .view()
 ```
 
-[TODO]: `Arquero` version of `na.rm`?
+TODO: `Arquero` version of `na.rm`?
