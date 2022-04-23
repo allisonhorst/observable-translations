@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="quarto-0.9.226">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Allison Horst">
+  <meta name="dcterms.date" content="2022-04-23">
+  <title>A comparison of basic data visualization in ggplot2 and Observable Plot</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+
+  <script src="ggplot2-plot_files/libs/clipboard/clipboard.min.js"></script>
+  <script src="ggplot2-plot_files/libs/quarto-html/quarto.js"></script>
+  <script src="ggplot2-plot_files/libs/quarto-html/popper.min.js"></script>
+  <script src="ggplot2-plot_files/libs/quarto-html/tippy.umd.min.js"></script>
+  <script src="ggplot2-plot_files/libs/quarto-html/anchor.min.js"></script>
+  <link href="ggplot2-plot_files/libs/quarto-html/tippy.css" rel="stylesheet">
+  <link id="quarto-text-highlighting-styles" href="ggplot2-plot_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <script src="ggplot2-plot_files/libs/bootstrap/bootstrap.min.js"></script>
+  <link href="ggplot2-plot_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+  <link href="ggplot2-plot_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <script type="module" src="ggplot2-plot_files/libs/quarto-ojs/esbuild-bundle.js"></script>
+  <link href="ggplot2-plot_files/libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body class="fullcontent">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  
+</div>
+
+<main class="content" id="quarto-document-content">
+<header id="title-block-header" class="quarto-title-block default">
+
+
+
+
+<div class="quarto-title"><h1 class="title display-7">A comparison of basic data visualization in ggplot2 and Observable Plot</h1><p class="subtitle lead">R to JavaScript translations</p></div><div class="quarto-title-meta"><div><div class="quarto-title-meta-heading">Author</div><div class="quarto-title-meta-contents"><div class="quarto-title-authors"><div><div>
+<p>Allison Horst</p>
+</div></div></div></div></div><div><div class="quarto-title-meta-heading">Published</div><div class="quarto-title-meta-contents"><p class="date">April 23, 2022</p></div></div></div></header>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The goal of this document is to compare code for basic data visualization using the <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> package in R, and the <a href="https://observablehq.com/@observablehq/plot"><code>Observable Plot</code></a> library in JavaScript.</p>
+<p>Be warned: I’m a JavaScript newbie and this is very much a living document!</p>
+</section>
+<section id="the-bare-bones" class="level2">
+<h2 class="anchored" data-anchor-id="the-bare-bones">The bare bones</h2>
+<p>So what do the “bare bones” structures of a basic plot made with <code>ggplot2</code> and <code>Plot</code> look like? How are they similar, and how are they different?</p>
+<section id="a-ggplot2-skeleton" class="level3">
+<h3 class="anchored" data-anchor-id="a-ggplot2-skeleton">A <code>ggplot2</code> skeleton</h3>
+<p>The basic structure of a ggplot scatterplot looks something like the code below. The arguments within <code>geom_point()</code> here can also be within <code>ggplot()</code>, which would make them the default across multiple geometries if there were multiple plot types overlayed in the same <code>ggplot</code> object. For the sake of easier comparison between libraries, I’m putting the data and variable information (aesthetic mappings) within the <code>geom</code> layer.</p>
+<pre><code>ggplot() +
+  geom_point(data = df, aes(x = variable_1, y = variable_2))</code></pre>
+<p>What are these different pieces?</p>
+<ul>
+<li><code>ggplot()</code>: initializes a <code>ggplot</code> object</li>
+<li><code>geom_point()</code>: specify the geometry (plot type)</li>
+<li><code>data = df</code>: data frame (<code>df</code>) from which information is pulled to make the graph</li>
+<li><code>aes()</code>: provide a list of aesthetic mappings (e.g.&nbsp;what are the x- and y-variables, but can also include other aesthetics mapped onto a variable).</li>
+</ul>
+</section>
+<section id="an-observable-plot-skeleton" class="level3">
+<h3 class="anchored" data-anchor-id="an-observable-plot-skeleton">An <code>Observable Plot</code> skeleton</h3>
+<p><strong>Note:</strong> I don’t have the language yet to talk about some <code>Observable Plot</code> specifics - I’m working on it! This reflects my current thinking about how <code>ggplot2</code> pieces map onto <code>Observable Plot</code> plot code.</p>
+<p>First, what would the skeleton shown in <code>ggplot2</code> above look like in <code>Plot</code>?</p>
+<pre><code>Plot.dot(df, {x: "variable_1", y: "variable_2"}).plot()</code></pre>
+<p>Currently, my attempt to translate between the two is something like this:</p>
+<ul>
+<li><code>Plot.dot()</code> is the geometry (like <code>geom_point()</code> in <code>ggplot2</code>)</li>
+<li><code>df</code> is the data</li>
+<li><code>{x: "variable_1", y: "variable_2"}</code> provides aesthetic mappings, like <code>aes(x = variable_1, y = variable_2)</code> in <code>ggplot2</code></li>
+<li><code>plot()</code> actually makes the thing (like <code>ggplot()</code>)</li>
+</ul>
+<p>With those similarities in mind, let’s make a real example using the <code>penguins</code> dataset (which can be found in the R <a href="https://allisonhorst.github.io/palmerpenguins/"><code>palmerpenguins</code></a> package).</p>
+</section>
+</section>
+<section id="a-scatterplot-example-with-penguins" class="level2">
+<h2 class="anchored" data-anchor-id="a-scatterplot-example-with-penguins">A scatterplot example with <code>penguins</code></h2>
+<section id="attach-packages" class="level3">
+<h3 class="anchored" data-anchor-id="attach-packages">Attach packages:</h3>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>✓ ggplot2 3.3.5          ✓ purrr   0.3.4     
+✓ tibble  3.1.6          ✓ dplyr   1.0.8.9000
+✓ tidyr   1.2.0          ✓ stringr 1.4.0     
+✓ readr   2.1.2          ✓ forcats 0.5.1     </code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb7" data-startfrom="62" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 61;"><span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { aq<span class="op">,</span> op } <span class="im">from</span> <span class="st">'@uwdata/arquero'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ojs-cell-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</section>
+<section id="read-in-penguins.csv" class="level3">
+<h3 class="anchored" data-anchor-id="read-in-penguins.csv">Read in <code>penguins.csv</code></h3>
+<p>Read in the data using <code>readr::read_csv()</code> and <code>aq.loadCSV()</code> (the latter from the <a href="https://observablehq.com/@uwdata/introducing-arquero"><code>Arquero</code></a> JavaScript library).</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>penguins_r <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"penguins.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stderr">
+<pre><code>Rows: 344 Columns: 8
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (3): species, island, sex
+dbl (5): bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, year
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb10" data-startfrom="74" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 73;"><span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a>penguins_js <span class="op">=</span> aq<span class="op">.</span><span class="fu">loadCSV</span>(<span class="st">"penguins.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ojs-cell-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb11" data-startfrom="78" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 77;"><span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a>penguins_js</span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ojs-cell-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</section>
+<section id="a-scatterplot-of-bill-dimensions-in-ggplot2" class="level3">
+<h3 class="anchored" data-anchor-id="a-scatterplot-of-bill-dimensions-in-ggplot2">A scatterplot of bill dimensions in <code>ggplot2</code></h3>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> penguins_r, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> bill_depth_mm, <span class="at">y =</span> bill_length_mm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="ggplot2-plot_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="the-same-scatterplot-in-observable-plot" class="level3">
+<h3 class="anchored" data-anchor-id="the-same-scatterplot-in-observable-plot">The same scatterplot in <code>Observable Plot</code></h3>
+<div class="cell">
+<div class="sourceCode" id="cb14" data-startfrom="94" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 93;"><span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">dot</span>(penguins_js<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"bill_depth_mm"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"bill_length_mm"</span>})<span class="op">.</span><span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ojs-cell-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="updating-aesthetics" class="level2">
+<h2 class="anchored" data-anchor-id="updating-aesthetics">Updating aesthetics</h2>
+<p>We can update aesthetics for graphs using similar arguments in <code>ggplot2</code> and <code>Plot</code>. Here, let’s create a bar graph with the counts of penguins by species in the dataset. Then we’ll make the bar fill color “yellow” and the outline color “blue” (yes, it’s going to be hideous). Let’s go!</p>
+<p>To simplify the graph examples, first I’ll just create a basic table of count by species.</p>
+<p><strong>Note:</strong> The <code>count()</code> function in <code>dplyr</code> automatically finds counts by the groups in the variable you specify, so a separate <code>group_by()</code> statement isn’t necessary (as in the JavaScript example). In both, the counts are stored in a new column named <code>n</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>species_ct_r <span class="ot">&lt;-</span> penguins_r <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb16" data-startfrom="111" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 110;"><span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>species_ct_js <span class="op">=</span> penguins_js</span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">groupby</span>(<span class="st">"species"</span>)</span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ojs-cell-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">data =</span> species_ct_r, </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> n),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"yellow"</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="ggplot2-plot_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb18" data-startfrom="125" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 124;"><span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">barY</span>(species_ct_js<span class="op">,</span></span>
+<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a>          {<span class="dt">x</span><span class="op">:</span> <span class="st">"species"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"n"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"yellow"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"blue"</span>})<span class="op">.</span><span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ojs-cell-6" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<p>WHOA WHOA WHOA. What</p>
+
+</section>
+</main>
+<!-- /main column -->
+<script type="ojs-module-contents">
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"import { aq, op } from '@uwdata/arquero'"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"penguins_js = aq.loadCSV(\"penguins.csv\")"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"penguins_js\n  .view(10)"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"Plot.dot(penguins_js, {x: \"bill_depth_mm\", y: \"bill_length_mm\"}).plot()"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"species_ct_js = penguins_js\n  .groupby(\"species\")\n  .count()"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"Plot.barY(species_ct_js,\n          {x: \"species\", y: \"n\", fill: \"yellow\", stroke: \"blue\"}).plot()"}]}
+</script>
+<script type="module">
+window._ojs.paths.runtimeToDoc = "../../..";
+window._ojs.paths.runtimeToRoot = "../../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    setTimeout(function() {
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+</body></html>

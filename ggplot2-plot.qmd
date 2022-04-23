@@ -1,0 +1,129 @@
+---
+title: "A comparison of basic data visualization in ggplot2 and Observable Plot"
+subtitle: "R to JavaScript translations"
+author: "Allison Horst"
+date: 2022-04-23
+---
+
+## Overview
+
+The goal of this document is to compare code for basic data visualization using the [`ggplot2`](https://ggplot2.tidyverse.org/) package in R, and the [`Observable Plot`](https://observablehq.com/@observablehq/plot) library in JavaScript.
+
+Be warned: I'm a JavaScript newbie and this is very much a living document! 
+
+## The bare bones
+
+So what do the "bare bones" structures of a basic plot made with `ggplot2` and `Plot` look like? How are they similar, and how are they different? 
+
+### A `ggplot2` skeleton
+
+The basic structure of a ggplot scatterplot looks something like the code below. The arguments within `geom_point()` here can also be within `ggplot()`, which would make them the default across multiple geometries if there were multiple plot types overlayed in the same `ggplot` object. For the sake of easier comparison between libraries, I'm putting the data and variable information (aesthetic mappings) within the `geom` layer. 
+
+```
+ggplot() +
+  geom_point(data = df, aes(x = variable_1, y = variable_2))
+```
+
+What are these different pieces? 
+
+- `ggplot()`: initializes a `ggplot` object 
+- `geom_point()`: specify the geometry (plot type)
+- `data = df`: data frame (`df`) from which information is pulled to make the graph
+- `aes()`: provide a list of aesthetic mappings (e.g. what are the x- and y-variables, but can also include other aesthetics mapped onto a variable).  
+
+### An `Observable Plot` skeleton
+
+**Note:** I don't have the language yet to talk about some `Observable Plot` specifics - I'm working on it! This reflects my current thinking about how `ggplot2` pieces map onto `Observable Plot` plot code. 
+
+First, what would the skeleton shown in `ggplot2` above look like in `Plot`?
+
+```
+Plot.dot(df, {x: "variable_1", y: "variable_2"}).plot()
+```
+
+Currently, my attempt to translate between the two is something like this: 
+
+- `Plot.dot()` is the geometry (like `geom_point()` in `ggplot2`)
+- `df` is the data
+- `{x: "variable_1", y: "variable_2"}` provides aesthetic mappings, like `aes(x = variable_1, y = variable_2)` in `ggplot2`
+- `plot()` actually makes the thing (like `ggplot()`)
+
+With those similarities in mind, let's make a real example using the `penguins` dataset (which can be found in the R [`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/) package).
+
+## A scatterplot example with `penguins`
+
+### Attach packages: 
+
+```{r}
+library(tidyverse)
+```
+
+```{ojs}
+import { aq, op } from '@uwdata/arquero'
+```
+
+### Read in `penguins.csv`
+
+Read in the data using `readr::read_csv()` and `aq.loadCSV()` (the latter from the [`Arquero`](https://observablehq.com/@uwdata/introducing-arquero) JavaScript library).
+
+```{r}
+penguins_r <- readr::read_csv("penguins.csv")
+```
+
+```{ojs}
+penguins_js = aq.loadCSV("penguins.csv")
+```
+
+```{ojs}
+penguins_js
+  .view(10)
+```
+
+
+### A scatterplot of bill dimensions in `ggplot2`
+
+```{r}
+ggplot() +
+  geom_point(data = penguins_r, 
+             aes(x = bill_depth_mm, y = bill_length_mm))
+```
+
+### The same scatterplot in `Observable Plot`
+
+```{ojs}
+Plot.dot(penguins_js, {x: "bill_depth_mm", y: "bill_length_mm"}).plot()
+```
+
+## Updating aesthetics
+
+We can update aesthetics for graphs using similar arguments in `ggplot2` and `Plot`. Here, let's create a bar graph with the counts of penguins by species in the dataset. Then we'll make the bar fill color "yellow" and the outline color "blue" (yes, it's going to be hideous). Let's go! 
+
+To simplify the graph examples, first I'll just create a basic table of count by species. 
+
+**Note:** The `count()` function in `dplyr` automatically finds counts by the groups in the variable you specify, so a separate `group_by()` statement isn't necessary (as in the JavaScript example). In both, the counts are stored in a new column named `n`.
+
+```{r}
+species_ct_r <- penguins_r %>% 
+  count(species)
+```
+
+```{ojs}
+species_ct_js = penguins_js
+  .groupby("species")
+  .count()
+```
+
+```{r}
+ggplot() +
+  geom_col(data = species_ct_r, 
+           aes(x = species, y = n),
+           fill = "yellow",
+           color = "blue")
+```
+
+```{ojs}
+Plot.barY(species_ct_js,
+          {x: "species", y: "n", fill: "yellow", stroke: "blue"}).plot()
+```
+
+WHOA WHOA WHOA. What
