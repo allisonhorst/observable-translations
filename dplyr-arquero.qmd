@@ -5,6 +5,8 @@ author: "Allison Horst"
 date: 2022-04-22
 ---
 
+![Arquero (JavaScript) and dplyr (R), two learner-friendly data wrangling libraries side-by-side.](dplyr-arquero.jpg){width=75%}
+
 ## Overview
 
 The goal of this document is to compare some basic wrangling (between `tidyverse` functions (especially in `dplyr`) in R, and `Arquero` in JavaScript) and visualization (between `ggplot2` in R, and `Plot` in JavaScript). I'm still learning about JavaScript and Observable -- this is a living document that will keep growing (and being corrected) as I learn more useful comparisons! 
@@ -204,3 +206,5 @@ penguins_js
 ```
 
 TODO: `Arquero` version of `na.rm`?
+
+## ...to be continued! 
