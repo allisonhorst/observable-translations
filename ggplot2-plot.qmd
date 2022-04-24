@@ -181,11 +181,12 @@ Plot.plot({
 
 ## More complex graphs
 
-Add more comparisons on: 
+TODO Add more comparisons on: 
 
 - Faceting
 - Custom color schemes / formatting / etc.
 - Updating titles / labels
 - Gridlines 
+- Plot types
 
 ### ...to be continued! 
