@@ -50,7 +50,13 @@ Currently, my attempt to translate between the two is something like this:
 - `{x: "variable_1", y: "variable_2"}` provides aesthetic mappings, like `aes(x = variable_1, y = variable_2)` in `ggplot2`
 - `plot()` actually makes the thing (like `ggplot()`)
 
-With those similarities in mind, let's make a real example using the `penguins` dataset (which can be found in the R [`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/) package).
+## A visual comparison of the scatterplot skeletons
+
+Here's how my R brain is currently aligning these pieces - under the hood these may not align this way, but it's helping me build some comfort with Observable Plot.
+
+![Brain alignment: mapping pieces between ggplot2 and Observable Plot scatterplot code.](visual-compare.jpg){width="90%"}
+
+With those similarities in mind, now I'll try out some real examples using the `penguins` dataset (which can be found in the R [`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/) package).
 
 ## A scatterplot example with `penguins`
 

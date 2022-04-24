@@ -148,8 +148,18 @@
 <li><code>{x: "variable_1", y: "variable_2"}</code> provides aesthetic mappings, like <code>aes(x = variable_1, y = variable_2)</code> in <code>ggplot2</code></li>
 <li><code>plot()</code> actually makes the thing (like <code>ggplot()</code>)</li>
 </ul>
-<p>With those similarities in mind, let’s make a real example using the <code>penguins</code> dataset (which can be found in the R <a href="https://allisonhorst.github.io/palmerpenguins/"><code>palmerpenguins</code></a> package).</p>
 </section>
+</section>
+<section id="a-visual-comparison-of-the-scatterplot-skeletons" class="level2">
+<h2 class="anchored" data-anchor-id="a-visual-comparison-of-the-scatterplot-skeletons">A visual comparison of the scatterplot skeletons</h2>
+<p>Here’s how my R brain is currently aligning these pieces - under the hood these may not align this way, but it’s helping me build some comfort with Observable Plot.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="visual-compare.jpg" class="img-fluid figure-img" style="width:90.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Brain alignment: mapping pieces between ggplot2 and Observable Plot scatterplot code.</figcaption><p></p>
+</figure>
+</div>
+<p>With those similarities in mind, now I’ll try out some real examples using the <code>penguins</code> dataset (which can be found in the R <a href="https://allisonhorst.github.io/palmerpenguins/"><code>palmerpenguins</code></a> package).</p>
 </section>
 <section id="a-scatterplot-example-with-penguins" class="level2">
 <h2 class="anchored" data-anchor-id="a-scatterplot-example-with-penguins">A scatterplot example with <code>penguins</code></h2>
@@ -173,7 +183,7 @@ x dplyr::lag()    masks stats::lag()</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb7" data-startfrom="64" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 63;"><span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { aq<span class="op">,</span> op } <span class="im">from</span> <span class="st">'@uwdata/arquero'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7" data-startfrom="70" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 69;"><span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { aq<span class="op">,</span> op } <span class="im">from</span> <span class="st">'@uwdata/arquero'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-1" data-nodetype="declaration">
 
@@ -198,7 +208,7 @@ dbl (5): bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, year
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb10" data-startfrom="76" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 75;"><span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>penguins_js <span class="op">=</span> aq<span class="op">.</span><span class="fu">loadCSV</span>(<span class="st">"penguins.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10" data-startfrom="82" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 81;"><span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a>penguins_js <span class="op">=</span> aq<span class="op">.</span><span class="fu">loadCSV</span>(<span class="st">"penguins.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-2" data-nodetype="declaration">
 
@@ -206,8 +216,8 @@ dbl (5): bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, year
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb11" data-startfrom="80" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 79;"><span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a>penguins_js</span>
-<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11" data-startfrom="86" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 85;"><span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a>penguins_js</span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-3" data-nodetype="expression">
 
@@ -232,7 +242,7 @@ dbl (5): bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, year
 <section id="the-same-scatterplot-in-observable-plot" class="level3">
 <h3 class="anchored" data-anchor-id="the-same-scatterplot-in-observable-plot">The same scatterplot in <code>Observable Plot</code></h3>
 <div class="cell">
-<div class="sourceCode" id="cb14" data-startfrom="96" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 95;"><span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">dot</span>(penguins_js<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"bill_depth_mm"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"bill_length_mm"</span>})<span class="op">.</span><span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14" data-startfrom="102" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 101;"><span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">dot</span>(penguins_js<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"bill_depth_mm"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"bill_length_mm"</span>})<span class="op">.</span><span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-4" data-nodetype="expression">
 
@@ -251,9 +261,9 @@ dbl (5): bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, year
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb16" data-startfrom="113" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 112;"><span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>species_ct_js <span class="op">=</span> penguins_js</span>
-<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">groupby</span>(<span class="st">"species"</span>)</span>
-<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16" data-startfrom="119" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 118;"><span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a>species_ct_js <span class="op">=</span> penguins_js</span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">groupby</span>(<span class="st">"species"</span>)</span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-5" data-nodetype="declaration">
 
