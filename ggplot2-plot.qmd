@@ -5,6 +5,8 @@ author: "Allison Horst"
 date: 2022-04-23
 ---
 
+![Observable Plot and ggplot2 admiring each other's talent for creating beautiful data visualizations in JavaScript and R!](plot-ggplot.jpg){width=75%}
+
 ## Overview
 
 The goal of this document is to compare code for basic data visualization using the [`ggplot2`](https://ggplot2.tidyverse.org/) package in R, and the [`Observable Plot`](https://observablehq.com/@observablehq/plot) library in JavaScript.
@@ -122,8 +124,7 @@ ggplot() +
 ```
 
 ```{ojs}
-Plot.barY(species_ct_js,
-          {x: "species", y: "n", fill: "yellow", stroke: "blue"}).plot()
+
 ```
 
-WHOA WHOA WHOA. What
+### ...to be continued! 
