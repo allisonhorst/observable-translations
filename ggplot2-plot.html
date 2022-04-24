@@ -254,16 +254,25 @@ dbl (5): bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, year
 <section id="updating-aesthetics" class="level2">
 <h2 class="anchored" data-anchor-id="updating-aesthetics">Updating aesthetics</h2>
 <p>We can update aesthetics for graphs using similar arguments in <code>ggplot2</code> and <code>Plot</code>. Here, let’s create a bar graph with the counts of penguins by species in the dataset. Then we’ll make the bar fill color “yellow” and the outline color “blue” (yes, it’s going to be hideous). Let’s go!</p>
-<p>To simplify the graph examples, first I’ll just create a basic table of count by species.</p>
-<p><strong>Note:</strong> The <code>count()</code> function in <code>dplyr</code> automatically finds counts by the groups in the variable you specify, so a separate <code>group_by()</code> statement isn’t necessary (as in the JavaScript example). In both, the counts are stored in a new column named <code>n</code>.</p>
+<p>To simplify the graph examples, first I’ll just create a basic table of count by species. <strong>Note:</strong> The <code>count()</code> function in <code>dplyr</code> automatically finds counts by the groups in the variable you specify, so a separate <code>group_by()</code> statement isn’t necessary (as in the JavaScript example). In <code>dplyr</code> the counts are stored in a column named <code>n</code>, and in <code>Arquero</code> the counts are stored in a column called <code>count</code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb15"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>species_ct_r <span class="ot">&lt;-</span> penguins_r <span class="sc">%&gt;%</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb16" data-startfrom="119" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 118;"><span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a>species_ct_js <span class="op">=</span> penguins_js</span>
-<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">groupby</span>(<span class="st">"species"</span>)</span>
-<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  species       n
+  &lt;chr&gt;     &lt;int&gt;
+1 Adelie      152
+2 Chinstrap    68
+3 Gentoo      124</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb17" data-startfrom="123" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 122;"><span id="cb17-123"><a href="#cb17-123" aria-hidden="true" tabindex="-1"></a>species_ct_js <span class="op">=</span> penguins_js</span>
+<span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">groupby</span>(<span class="st">"species"</span>)</span>
+<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-5" data-nodetype="declaration">
 
@@ -271,15 +280,71 @@ dbl (5): bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, year
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">data =</span> species_ct_r, </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> n),</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"yellow"</span>,</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18" data-startfrom="129" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 128;"><span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a>species_ct_js</span>
+<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">view</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2-plot_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div id="ojs-cell-6" data-nodetype="expression">
+
 </div>
 </div>
+</div>
+<p>And now we can similarly make a bar plot of the counts using <code>ggplot2::geom_col()</code> or <code>Plot.barY()</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">data =</span> species_ct_r, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> n),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"yellow"</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="ggplot2-plot_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb20" data-startfrom="144" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 143;"><span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">barY</span>(species_ct_js<span class="op">,</span> </span>
+<span id="cb20-145"><a href="#cb20-145" aria-hidden="true" tabindex="-1"></a>          {<span class="dt">x</span><span class="op">:</span> <span class="st">"species"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"count"</span><span class="op">,</span> </span>
+<span id="cb20-146"><a href="#cb20-146" aria-hidden="true" tabindex="-1"></a>          <span class="dt">fill</span><span class="op">:</span> <span class="st">"yellow"</span><span class="op">,</span> </span>
+<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a>          <span class="dt">stroke</span><span class="op">:</span> <span class="st">"blue"</span>})</span>
+<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span><span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ojs-cell-7" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<section id="update-aesthetics-based-on-a-variable" class="level3">
+<h3 class="anchored" data-anchor-id="update-aesthetics-based-on-a-variable">Update aesthetics based on a variable</h3>
+<p>Update the fill color based on species levels, rather than by a constant:</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">data =</span> species_ct_r, </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes</span>(<span class="at">x =</span> species, </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> n,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="ggplot2-plot_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb22" data-startfrom="164" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 163;"><span id="cb22-164"><a href="#cb22-164" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">barY</span>(species_ct_js<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"species"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"count"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"species"</span>})<span class="op">.</span><span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ojs-cell-8" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<p>One notable difference above is that ggplot automatically adds a legend for each variable mapped to a graph aesthetic (e.g.&nbsp;<code>species</code> is mapped onto <code>fill</code> in the ggplot graph above), but there is no default legend for variable mappings in Observable Plot.</p>
+<!-- TODO: Why isn't this legend showing up? See below when rendered. Based on example [here](https://observablehq.com/@observablehq/plot-legends). -->
+</section>
+</section>
+<section id="more-complex-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="more-complex-graphs">More complex graphs</h2>
+<p>Add more comparisons on:</p>
+<ul>
+<li>Faceting</li>
+<li>Custom color schemes / formatting / etc.</li>
+<li>Updating titles / labels</li>
+<li>Gridlines</li>
+</ul>
 <section id="to-be-continued" class="level3">
 <h3 class="anchored" data-anchor-id="to-be-continued">…to be continued!</h3>
 
@@ -288,7 +353,7 @@ dbl (5): bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, year
 </main>
 <!-- /main column -->
 <script type="ojs-module-contents">
-{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"import { aq, op } from '@uwdata/arquero'"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"penguins_js = aq.loadCSV(\"penguins.csv\")"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"penguins_js\n  .view(10)"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"Plot.dot(penguins_js, {x: \"bill_depth_mm\", y: \"bill_length_mm\"}).plot()"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"species_ct_js = penguins_js\n  .groupby(\"species\")\n  .count()"}]}
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"import { aq, op } from '@uwdata/arquero'"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"penguins_js = aq.loadCSV(\"penguins.csv\")"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"penguins_js\n  .view(10)"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"Plot.dot(penguins_js, {x: \"bill_depth_mm\", y: \"bill_length_mm\"}).plot()"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"species_ct_js = penguins_js\n  .groupby(\"species\")\n  .count()"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"species_ct_js\n  .view()"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"Plot.barY(species_ct_js, \n          {x: \"species\", y: \"count\", \n          fill: \"yellow\", \n          stroke: \"blue\"})\n          .plot()"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"Plot.barY(species_ct_js, {x: \"species\", y: \"count\", fill: \"species\"}).plot()"}]}
 </script>
 <script type="module">
 window._ojs.paths.runtimeToDoc = "../../..";

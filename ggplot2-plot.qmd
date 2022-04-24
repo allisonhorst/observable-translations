@@ -107,19 +107,30 @@ Plot.dot(penguins_js, {x: "bill_depth_mm", y: "bill_length_mm"}).plot()
 We can update aesthetics for graphs using similar arguments in `ggplot2` and `Plot`. Here, let's create a bar graph with the counts of penguins by species in the dataset. Then we'll make the bar fill color "yellow" and the outline color "blue" (yes, it's going to be hideous). Let's go! 
 
 To simplify the graph examples, first I'll just create a basic table of count by species. 
-
-**Note:** The `count()` function in `dplyr` automatically finds counts by the groups in the variable you specify, so a separate `group_by()` statement isn't necessary (as in the JavaScript example). In both, the counts are stored in a new column named `n`.
+**Note:** The `count()` function in `dplyr` automatically finds counts by the groups in the variable you specify, so a separate `group_by()` statement isn't necessary (as in the JavaScript example). In `dplyr` the counts are stored in a column named `n`, and in `Arquero` the counts are stored in a column called `count`.
 
 ```{r}
 species_ct_r <- penguins_r %>% 
   count(species)
 ```
 
+```{r, echo = FALSE}
+species_ct_r
+```
+
+
 ```{ojs}
 species_ct_js = penguins_js
   .groupby("species")
   .count()
 ```
+
+```{ojs, echo = FALSE}
+species_ct_js
+  .view()
+```
+
+And now we can similarly make a bar plot of the counts using `ggplot2::geom_col()` or `Plot.barY()`:
 
 ```{r}
 ggplot() +
@@ -130,7 +141,51 @@ ggplot() +
 ```
 
 ```{ojs}
-
+Plot.barY(species_ct_js, 
+          {x: "species", y: "count", 
+          fill: "yellow", 
+          stroke: "blue"})
+          .plot()
 ```
+
+### Update aesthetics based on a variable
+
+Update the fill color based on species levels, rather than by a constant: 
+
+```{r}
+ggplot() +
+  geom_col(data = species_ct_r, 
+           aes(x = species, 
+               y = n,
+               fill = species))
+```
+
+```{ojs}
+Plot.barY(species_ct_js, {x: "species", y: "count", fill: "species"}).plot()
+```
+
+One notable difference above is that ggplot automatically adds a legend for each variable mapped to a graph aesthetic (e.g. `species` is mapped onto `fill` in the ggplot graph above), but there is no default legend for variable mappings in Observable Plot. 
+
+<!-- TODO: Why isn't this legend showing up? See below when rendered. Based on example [here](https://observablehq.com/@observablehq/plot-legends). -->
+
+```{ojs, include = FALSE}
+Plot.plot({
+  color: {
+    legend: true
+  },
+  marks: [
+    Plot.barY(species_ct_js, {x: "species", y: "count", stroke: "species"})
+  ]
+})
+```
+
+## More complex graphs
+
+Add more comparisons on: 
+
+- Faceting
+- Custom color schemes / formatting / etc.
+- Updating titles / labels
+- Gridlines 
 
 ### ...to be continued! 
